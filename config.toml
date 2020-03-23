@@ -1,0 +1,24 @@
+base_url = "https://kfna.overeasyctf.com"
+build_search_index = false
+compile_sass = true
+generate_rss = true
+highlight_code = true
+title = "KFNA Resources"
+
+#taxonomies = [
+#    {name = "restaurant_tags"}
+#]
+
+[extra]
+nav_links = [
+	{ url = "/restaurants", text = "Restaurants" },
+	{ url = "/grocery_delivery", text = "Grocery Delivery" },
+	{ url = "/volunteering", text = "Volunteering" },
+]
+
+[extra.restaurant_tags_nice_names]
+"pickup-curbside" = "Curbside pickup"
+"pickup-takeout" = "Takeout-style pickup"
+"delivery-3rdparty" = "(3rd party) Delivery"
+"call-to-order" = "Call to place order"
+"gift-cards" = "Gift cards available"
