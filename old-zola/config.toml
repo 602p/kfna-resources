@@ -12,6 +12,7 @@ title = "KFNA Resources"
 [extra]
 nav_links = [
 	{ url = "/restaurants", text = "Restaurants" },
+	{ url = "/businesses", text = "Businesses" },
 	{ url = "/grocery_delivery", text = "Grocery Delivery" },
 	{ url = "/volunteering", text = "Volunteering" },
 ]

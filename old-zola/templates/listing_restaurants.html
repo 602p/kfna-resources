@@ -2,9 +2,10 @@
 
 {% block headextra %}
 <script type="text/javascript">
-posting_data = [
+post_tags = [
 {% for page in section.pages %}
-	{{page | json_encode() | safe}},
+	{"slug":{{page.slug | json_encode() | safe}},
+	 "tags":{{page.taxonomies.restaurant_tags | json_encode() | safe}}},
 {% endfor %}
 ];
 
@@ -16,15 +17,15 @@ tags = [
 
 $(document).ready(function(){
 	$(".filter-checkbox").change(function(e) {
-		posting_data.forEach(function(item) {
+		post_tags.forEach(function(item) {
 			$("#listing-"+item.slug).show();
 		});
 
 		tags.forEach(function(tag) {
 			if($("#filter-"+tag).is(":checked")) {
 				console.log(tag);
-				posting_data.forEach(function(item) {
-					if (!item.taxonomies.restaurant_tags.includes(tag)) {
+				post_tags.forEach(function(item) {
+					if (!item.tags.includes(tag)) {
 						$("#listing-"+item.slug).hide();
 					}
 				});
@@ -40,7 +41,7 @@ $(document).ready(function(){
 		Filter only those restaurants that provide...
 		<ul>
 			{% for tag, fancy in config.extra.restaurant_tags_nice_names %}
-				<li><input type="checkbox" id="filter-{{tag}}" class="filter-checkbox" data-tag="{{tag}}">&nbsp;&nbsp;<label for="filter-{{tag}}">{{fancy}}</label></li>
+				<li><input type="checkbox" id="filter-{{tag}}" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-{{tag}}">{{fancy}}</label></li>
 			{% endfor %}
 		</ul>
 	</div>

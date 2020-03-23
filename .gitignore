@@ -3,3 +3,5 @@
 !.keep
 
 /public/
+google-cloud-creds.json
+google-cloud-token.pickle
