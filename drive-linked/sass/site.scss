@@ -1,0 +1,192 @@
+// @import "https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans:300,400";
+// @import "grid/main.scss";
+
+@import "grid.scss";
+@import "color.scss";
+@import "footer.scss";
+@import "fonts.scss";
+@import "timeline.scss";
+@import "tables.scss";
+@import "mixins.scss";
+@import "restaurants.scss";
+
+html,
+body {
+    margin: 0; // margin-top: 40px;
+    // font-family: "Open Sans", sans-serif;
+    font-weight: 200;
+    font-size: 11pt; // @media (min-width: $screen-md-min) {
+    //     font-size: 1.0em;
+    // }
+    // @media (min-width: $screen-lg-min) {
+    //     font-size: 1.1em;
+    // }
+    //overflow-y: scroll;
+}
+
+
+*::selection {
+    background-color: $brand;
+    color: white;
+}
+
+a {
+    &:not(.nocolorlink) {
+        @include colored-link(1px, $link);
+    }
+    color: black;
+    text-decoration: none;
+}
+
+code {
+    font-family: "Inconsolata", monospace;
+}
+
+small {
+    font-size: 0.9em;
+    color: #999;
+}
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+/* .container {
+    h3 {
+        margin-top: 27px;
+        margin-bottom: 10px;
+    }
+} */
+
+.container {
+    img {
+        max-width: 100%;
+    }
+}
+
+header {
+    padding-bottom: 25px;
+    padding-top: 30px;
+    border-top: 10px solid $brand;
+    list-style-type: none;
+    font-size: 1.3em;
+    @media only screen and (max-width: $breakpoint-small) { 
+        padding-bottom: 0;
+    }
+    a.title {
+        @media only screen and (max-width: $breakpoint-small) { 
+            display: block;
+            text-align: center;
+            margin-right: 0;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        margin-right: 30px;
+        color: $brand;
+        font-size: 1.2em;
+        font-weight: 300;
+    }
+    div#nav {
+        display: inline;
+    }
+    @media only screen and (max-width: $breakpoint-small) { 
+        div#nav {
+            text-align: center;
+            display: block;
+            margin: auto;
+        }
+    }
+    a.link {
+        @include colored-link(1px, black);
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.page {
+    @include box-sizing(border-box);
+    padding: 30px; // border: 1px solid $gray;
+    // @include border-radius(5px);
+    // @include box-shadow(0px 0px 2px #999);
+    // &.flat-top {
+    //     @include border-radius(0px 0px 5px 5px);
+    // }
+}
+
+pre {
+    overflow-x: auto;
+    padding: 5px;
+    border-radius: 8px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    line-height: 1.1;
+}
+
+@mixin colored-box($color, $lighten) {
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 10px;
+    /* border: 1px solid darken($color, 10%); */
+    h2 {
+        margin: 0;
+        padding: 10px;
+        font-weight: 400;
+        border-top-left-radius: 10px;
+        background-color: lighten($color, $lighten / 2);
+        color: black;
+    }
+    div {
+        margin: 0;
+        padding: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: lighten($color, $lighten);
+        p {
+            margin: 8px;
+        }
+    }
+}
+
+
+div.box.platinum { @include colored-box(#D0D0D0, 15%); }
+div.box.gold { @include colored-box(#BB9922, 30%); }
+div.box.silver{ @include colored-box(#999999, 30%); }
+div.box.bronze{ @include colored-box(#996633, 30%); }
+.sponsorship > .box { margin-top: 2em; }
+
+.sponsor-logos {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sponsor-logos > a {
+    margin: 1em;
+    display: inline-block;
+}
+
+.platinum .sponsor-logos > img { width: 20em; }
+.platinum .sponsor-logos > a > img { width: 20em; }
+.gold .sponsor-logos > img { width: 17em; }
+.gold .sponsor-logos > a > img { width: 17em; }
+.silver .sponsor-logos > img { width: 15em; }
+.silver .sponsor-logos > a > img { width: 15em; }
+.bronze .sponsor-logos > img { width: 10em; }
+.bronze .sponsor-logos > a > img { width: 10em; }
+.grinkus .sponsor-logos > img { width: 10em; }
+.grinkus .sponsor-logos > a > img { width: 10em; }
+
+
+.sponsor-perks { flex-grow: 1; }
+
+.twoimage-box {
+    text-align:center;
+    img {
+        width: 45%;
+    }
+}
+
+a.no-style {
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,7 +1,10 @@
 .*
+*.pyc
 !.gitignore
 !.keep
 
+__pycache__
 /public/
 google-cloud-creds.json
 google-cloud-token.pickle
+service-account-creds.json

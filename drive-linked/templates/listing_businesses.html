@@ -1,0 +1,83 @@
+{% extends "page.html" %}
+
+{% block headextra %}
+<script type="text/javascript">
+post_tags = [
+{% for item in items %}
+	{"slug":{{item.slug_as_json() | safe}},
+	 "tags":{{item.tags_as_json() | safe}}},
+{% endfor %}
+];
+
+tags = [
+{% for tag, fancy in tag_names.items() %}
+	"{{tag}}",
+{% endfor %}
+];
+
+$(document).ready(function(){
+	$(".filter-checkbox").change(function(e) {
+		post_tags.forEach(function(item) {
+			$("#listing-"+item.slug).show();
+		});
+
+		tags.forEach(function(tag) {
+			if($("#filter-"+tag).is(":checked")) {
+				console.log(tag);
+				post_tags.forEach(function(item) {
+					if (!item.tags.includes(tag)) {
+						$("#listing-"+item.slug).hide();
+					}
+				});
+			}
+		});
+	});
+});
+</script>
+{% endblock %}
+
+{% block content %}
+	<div id="filter-box">
+		Filter only those restaurants that provide ALL of...
+		<ul id="multicol-list">
+			{% for tag, fancy in tag_names.items() %}
+				{% if tag not in nofilter_tags %}
+					<li><input type="checkbox" id="filter-{{tag}}" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-{{tag}}">{{fancy}}</label></li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+	{% for item in items | sort(attribute="name") %}
+		<div class="restaurant-listing" id="listing-{{item.slug}}">
+			<div class="inner">
+				<a href="{{item.link}}"><h2>{{item.name}}</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open {{item.hours | safe}} <br/>
+						{% if item.phone %}Phone: <a href="tel:{{item.phone}}">{{item.phone}}</a><br/>{% endif %}
+						{% if item.email %}Email: <a href="mailto:{{item.email}}">{{item.email}}</a><br/>{% endif %}
+					</div>
+					<div class="col-4">
+						Located at {{item.address}} <br/>
+						<a href="https://www.google.com/maps/place/{{item.address}},+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							{% for tag in item.tags %}
+								{% if tag not in hidden_tags %}
+									<li>{{tag_names.get(tag, tag)}}</li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+				{% if item.notes %}
+				<div class="extra-info">
+					<span class="summary">&rarr; {{item.notes | safe}}</span>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

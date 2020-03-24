@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <link rel="stylesheet" href="/static/css/normalize.css" />
+    <link rel="stylesheet" href="/static/scss/site.css" />
+    <link rel="stylesheet" href="/static/css/font-awesome.css" />
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    
+<script type="text/javascript">
+post_tags = [
+
+	{"slug":'apoy',
+	 "tags":['bitesquad', 'ubereats', 'doordash', 'any-delivery', 'phone', 'card', 'curbside']},
+
+	{"slug":'boludo',
+	 "tags":['takeout', 'curbside']},
+
+	{"slug":'butter',
+	 "tags":['giftcards']},
+
+	{"slug":'cocinalatina',
+	 "tags":['bitesquad', 'ubereats', 'any-delivery', 'phone', 'card', 'cash']},
+
+	{"slug":'currans',
+	 "tags":['phone', 'card', 'cash']},
+
+	{"slug":'davethepieguy',
+	 "tags":['firstparty', 'any-delivery', 'phone', 'takeout']},
+
+	{"slug":'driftwoodcharbar',
+	 "tags":['bitesquad', 'any-delivery', 'phone', 'card', 'cash']},
+
+	{"slug":'fivewattcoffee',
+	 "tags":['bitesquad', 'any-delivery', 'inperson', 'card', 'cash', 'takeout']},
+
+	{"slug":'goodtimespizza',
+	 "tags":['phone', 'card', 'cash', 'giftcards']},
+
+	{"slug":'grandcafe',
+	 "tags":['curbside', 'giftcards']},
+
+	{"slug":'lowbrow',
+	 "tags":['phone', 'card', 'curbside', 'giftcards']},
+
+	{"slug":'nighthawks',
+	 "tags":['online', 'card', 'cash', 'curbside']},
+
+	{"slug":'patisserie',
+	 "tags":['phone', 'email', 'curbside']},
+
+	{"slug":'revival',
+	 "tags":['firstparty', 'any-delivery', 'giftcards']},
+
+	{"slug":'royalgroundscoffee',
+	 "tags":[]},
+
+	{"slug":'sunstreetbreads',
+	 "tags":['curbside']},
+
+	{"slug":'tapsociety',
+	 "tags":['bitesquad', 'doordash', 'postmates', 'any-delivery', 'giftcards']},
+
+	{"slug":'youngman',
+	 "tags":['doordash', 'any-delivery', 'phone', 'takeout']},
+
+	{"slug":'zzzexamplefoobar',
+	 "tags":['doordash', 'any-delivery', 'phone', 'cash', 'card', 'takeout', 'curbside', 'giftcards']},
+
+];
+
+tags = [
+
+	"bitesquad",
+
+	"ubereats",
+
+	"doordash",
+
+	"phone",
+
+	"card",
+
+	"curbside",
+
+	"takeout",
+
+	"firstparty",
+
+	"cash",
+
+	"postmates",
+
+	"inperson",
+
+	"email",
+
+	"any-delivery",
+
+	"giftcards",
+
+];
+
+$(document).ready(function(){
+	$(".filter-checkbox").change(function(e) {
+		post_tags.forEach(function(item) {
+			$("#listing-"+item.slug).show();
+		});
+
+		tags.forEach(function(tag) {
+			if($("#filter-"+tag).is(":checked")) {
+				console.log(tag);
+				post_tags.forEach(function(item) {
+					if (!item.tags.includes(tag)) {
+						$("#listing-"+item.slug).hide();
+					}
+				});
+			}
+		});
+	});
+});
+</script>
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="title nocolorlink">KFNA Resources</a>
+
+            <div id="nav">
+                <a href="/restaurants" class="link">Restaurants</a>
+                <a href="/businesses" class="link">Businesses</a>
+                <a href="/grocery_delivery" class="link">Grocery&nbsp;Delivery</a>
+                <a href="/volunteering" class="link">Volunteering</a>
+            </div>
+        </div>
+    </header>
+    <div style="min-height: 50vh;">
+        <div class="container">
+            <a href="/rebuild">Rebuild from backing Google Drive Spreadsheet</a> (<a href="https://docs.google.com/spreadsheets/d/1WsuS_2tOo0iMiVDOquAd21RbzuyYQ0UaWqTwNcfD_jU/edit#gid=0">Spreadsheet here</a>).
+            
+	<div id="filter-box">
+		Filter only those restaurants that provide ALL of...
+		<ul id="multicol-list">
+			
+				
+			
+				
+			
+				
+			
+				
+					<li><input type="checkbox" id="filter-phone" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-phone">Order on the phone</label></li>
+				
+			
+				
+					<li><input type="checkbox" id="filter-card" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-card">Pay via card</label></li>
+				
+			
+				
+					<li><input type="checkbox" id="filter-curbside" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-curbside">Curbside pick-up</label></li>
+				
+			
+				
+					<li><input type="checkbox" id="filter-takeout" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-takeout">Takeout-style pick-up</label></li>
+				
+			
+				
+			
+				
+					<li><input type="checkbox" id="filter-cash" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-cash">Pay via cash</label></li>
+				
+			
+				
+			
+				
+					<li><input type="checkbox" id="filter-inperson" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-inperson">Order in-person</label></li>
+				
+			
+				
+					<li><input type="checkbox" id="filter-email" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-email">Order via email</label></li>
+				
+			
+				
+					<li><input type="checkbox" id="filter-any-delivery" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-any-delivery">Delivery options</label></li>
+				
+			
+				
+					<li><input type="checkbox" id="filter-giftcards" class="filter-checkbox">&nbsp;&nbsp;<label for="filter-giftcards">Gift cards available</label></li>
+				
+			
+		</ul>
+	</div>
+	
+		<div class="restaurant-listing" id="listing-apoy">
+			<div class="inner">
+				<a href="https://www.apoympls.com/menu"><h2>Apoy</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Daily:</b> Noon-9p <br/>
+						Phone: <a href="tel:612-824-4719">612-824-4719</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 4301 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/4301 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Bitesquad delivery</li>
+								
+							
+								
+									<li>Uber Eats delivery</li>
+								
+							
+								
+									<li>DoorDash delivery</li>
+								
+							
+								
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Pay via card</li>
+								
+							
+								
+									<li>Curbside pick-up</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; <b>example all bold</b></span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-boludo">
+			<div class="inner">
+				<a href="https://www.boludoempanadas.com/"><h2>Boludo</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Tue-Sun</b>: 11a-9p <br/>
+						Phone: <a href="tel:612-965-2858">612-965-2858</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 3749 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/3749 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Takeout-style pick-up</li>
+								
+							
+								
+									<li>Curbside pick-up</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; Also selling take-and-bake empanadas</span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-butter">
+			<div class="inner">
+				<a href="http://butterbakerycafe.com/our-menus"><h2>Butter</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Mon-Fri:</b> 7a-7p<br/><b>Sat:</b> 8a-2p <br/>
+						Phone: <a href="tel:612-521-7401">612-521-7401</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 3700 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/3700 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Gift cards available</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; Door Dash coming soon<br/>&rarr; <b>Online giftcards available</b>: <a href="https://squareup.com/gift/4VE08TFNZDTAG/order">https://squareup.com/gift/4VE08TFNZDTAG/order</a></span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-cocinalatina">
+			<div class="inner">
+				<a href="http://www.lacocinalatinamn.com/menu.html"><h2>Cocina Latina</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Mon-Fri: </b>Noon-8p<br/><b>Sat-Sun:</b> Noon-9p <br/>
+						Phone: <a href="tel:612-354-2971">612-354-2971</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 3764 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/3764 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Bitesquad delivery</li>
+								
+							
+								
+									<li>Uber Eats delivery</li>
+								
+							
+								
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Pay via card</li>
+								
+							
+								
+									<li>Pay via cash</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; <b>complex example </b><b><i>with </i></b>lots of style <u>fooo</u></span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-currans">
+			<div class="inner">
+				<a href="http://www.currans-restaurant.com/menu.php"><h2>Curran&#39;s</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Mon-Sat:</b> 8a-7p<br/><b>Sun:</b> 8a-2p <br/>
+						Phone: <a href="tel:612-822-5327">612-822-5327</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 4201 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/4201 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Pay via card</li>
+								
+							
+								
+									<li>Pay via cash</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-davethepieguy">
+			<div class="inner">
+				<a href="http://davethepieguy.com/#menu"><h2>Dave the Pie Guy</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Tue-Sun: </b>11:30a-5:30p <br/>
+						Phone: <a href="tel:612-871-9544">612-871-9544</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 3544 Grand Ave <br/>
+						<a href="https://www.google.com/maps/place/3544 Grand Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>First-party delivery</li>
+								
+							
+								
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Takeout-style pick-up</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-driftwoodcharbar">
+			<div class="inner">
+				<a href="http://driftwoodcharbar.com/pdf/driftwood-menu.pdf"><h2>Driftwood Char Bar</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open  <br/>
+						Phone: <a href="tel:612-354-3402">612-354-3402</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 4415 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/4415 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Bitesquad delivery</li>
+								
+							
+								
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Pay via card</li>
+								
+							
+								
+									<li>Pay via cash</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-fivewattcoffee">
+			<div class="inner">
+				<a href="http://fivewattcoffee.com/kingfield"><h2>Five Watt Coffee</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Mon-Sat:</b> 8a-Noon <br/>
+						Phone: <a href="tel:612-259-7519">612-259-7519</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 3745 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/3745 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Bitesquad delivery</li>
+								
+							
+								
+							
+								
+									<li>Order in-person</li>
+								
+							
+								
+									<li>Pay via card</li>
+								
+							
+								
+									<li>Pay via cash</li>
+								
+							
+								
+									<li>Takeout-style pick-up</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-goodtimespizza">
+			<div class="inner">
+				<a href="None"><h2>Good Times Pizza</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Wed-Sat:</b> 5-9p <br/>
+						Phone: <a href="tel:612-354-3589">612-354-3589</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 322 W 38th St <br/>
+						<a href="https://www.google.com/maps/place/322 W 38th St,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Pay via card</li>
+								
+							
+								
+									<li>Pay via cash</li>
+								
+							
+								
+									<li>Gift cards available</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; See store about Gift Cards</span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-grandcafe">
+			<div class="inner">
+				<a href="https://www.exploretock.com/grandcafemn/"><h2>Grand Cafe</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Daily:</b> 5-7p <br/>
+						Phone: <a href="tel:612-822-8260">612-822-8260</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 3804 Grand Ave <br/>
+						<a href="https://www.google.com/maps/place/3804 Grand Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Curbside pick-up</li>
+								
+							
+								
+									<li>Gift cards available</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; Take-and-bake meals available daily<br/>&rarr; <b>Online giftcards available</b>: <a href="https://www.grandcafemn.com/gift-certificates">https://www.grandcafemn.com/gift-certificates</a></span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-lowbrow">
+			<div class="inner">
+				<a href="http://thelowbrowmpls.com/menu/"><h2>Lowbrow</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Mon</b>: 4-8p<br/><b>Tue-Fri:</b> Noon-8p<br/><b>Sat-Sun: </b>11a-8p <br/>
+						Phone: <a href="tel:612-208-0720">612-208-0720</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 4244 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/4244 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Pay via card</li>
+								
+							
+								
+									<li>Curbside pick-up</li>
+								
+							
+								
+									<li>Gift cards available</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; <b>Online giftcards available</b>: <a href="https://thelowbrowmpls.com/news/gift-cards/">https://thelowbrowmpls.com/news/gift-cards/</a></span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-nighthawks">
+			<div class="inner">
+				<a href="https://www.nighthawksdinerbar.com/dinnermenu"><h2>Nighthawks</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Fri-Sat:</b> 4-8p<br/><b>Sun: </b>10a-1p <br/>
+						Phone: <a href="tel:612-248-8111">612-248-8111</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 3753 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/3753 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>online</li>
+								
+							
+								
+									<li>Pay via card</li>
+								
+							
+								
+									<li>Pay via cash</li>
+								
+							
+								
+									<li>Curbside pick-up</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-patisserie">
+			<div class="inner">
+				<a href="https://squareup.com/store/Pat46/?fbclid=IwAR3vqzB4vCBn-AqNgDohB7riN8DvYF-KJ0c61dJ9EXs423njcXw3PIv6QA8"><h2>Patisserie 46</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Tue-Sun</b>: 7a-2p <br/>
+						Phone: <a href="tel:612-354-3257">612-354-3257</a><br/>
+						Email: <a href="mailto:info@patisserie46.com">info@patisserie46.com</a><br/>
+					</div>
+					<div class="col-4">
+						Located at 4552 Grand Ave <br/>
+						<a href="https://www.google.com/maps/place/4552 Grand Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Order via email</li>
+								
+							
+								
+									<li>Curbside pick-up</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; Online ordering coming soon</span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-revival">
+			<div class="inner">
+				<a href="https://www.revivalrestaurants.com/minneapolis"><h2>Revival</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Daily</b>: 11a-10p <br/>
+						Phone: <a href="tel:612-345-4516">612-345-4516</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 4257 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/4257 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>First-party delivery</li>
+								
+							
+								
+							
+								
+									<li>Gift cards available</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; Download the Revival - St. Paul app and use promo code FUCORONA for 10% off first order<br/>&rarr; <b>Online giftcards available</b>: <a href="https://www.twistdavisgroup.com/gift-cards/">https://www.twistdavisgroup.com/gift-cards/</a></span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-royalgroundscoffee">
+			<div class="inner">
+				<a href="https://sites.google.com/site/royalgroundscoffee/menu"><h2>Royal Grounds Coffee</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Daily:</b> 6a-1p <br/>
+						Phone: <a href="tel:612-824-8593">612-824-8593</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 4161 Grand Ave <br/>
+						<a href="https://www.google.com/maps/place/4161 Grand Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; Will be open starting week of 3/23</span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-sunstreetbreads">
+			<div class="inner">
+				<a href="https://www.sunstreetbreads.com/order-online/"><h2>Sun Street Breads</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Tue-Sun</b>: 6:30a-2p<br/><b>Thu</b>: 5-8p (Pizza) <br/>
+						Phone: <a href="tel:612-354-3414">612-354-3414</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 4600 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/4600 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Curbside pick-up</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; Call when you arrive</span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-tapsociety">
+			<div class="inner">
+				<a href="https://www.toasttab.com/tap-society/v3"><h2>Tap Society</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Daily:</b> Noon-9.30p <br/>
+						Phone: <a href="tel:612-354-7045">612-354-7045</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 4555 Grand Ave <br/>
+						<a href="https://www.google.com/maps/place/4555 Grand Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>Bitesquad delivery</li>
+								
+							
+								
+									<li>DoorDash delivery</li>
+								
+							
+								
+									<li>Postmates delivery</li>
+								
+							
+								
+							
+								
+									<li>Gift cards available</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; <b>Online giftcards available</b>: <a href="https://www.toasttab.com/tap-society/giftcards">https://www.toasttab.com/tap-society/giftcards</a></span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-youngman">
+			<div class="inner">
+				<a href="http://youngmanmsp.com/"><h2>Young Man</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Tue-Sun: </b>4-7:30p <br/>
+						Phone: <a href="tel:952-444-2705">952-444-2705</a><br/>
+						
+					</div>
+					<div class="col-4">
+						Located at 3752 Nicollet Ave <br/>
+						<a href="https://www.google.com/maps/place/3752 Nicollet Ave,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>DoorDash delivery</li>
+								
+							
+								
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Takeout-style pick-up</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; Call ahead to order+pay and grab-and-go</span>
+				</div>
+				
+			</div>
+		</div>
+	
+		<div class="restaurant-listing" id="listing-zzzexamplefoobar">
+			<div class="inner">
+				<a href="None"><h2>ZZZ-Example Foo Bar</h2> <i class="fa fa-fw fa-link"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-4">
+						Open <b>Mon-Fri: </b>8a-Noon <br/>
+						Phone: <a href="tel:111-222-3333">111-222-3333</a><br/>
+						Email: <a href="mailto:some@email.com">some@email.com</a><br/>
+					</div>
+					<div class="col-4">
+						Located at 1234 Main St. <br/>
+						<a href="https://www.google.com/maps/place/1234 Main St.,+Minneapolis,+MN+55409/" target="_blank">Maps</a>
+					</div>
+					<div class="col-4">
+						<ul>
+							
+								
+									<li>DoorDash delivery</li>
+								
+							
+								
+							
+								
+									<li>Order on the phone</li>
+								
+							
+								
+									<li>Pay via cash</li>
+								
+							
+								
+									<li>Pay via card</li>
+								
+							
+								
+									<li>Takeout-style pick-up</li>
+								
+							
+								
+									<li>Curbside pick-up</li>
+								
+							
+								
+									<li>Gift cards available</li>
+								
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="extra-info">
+					<span class="summary">&rarr; Some example note<br/>&rarr; Multiple lines <b>with formatting</b> and other stuff<br/>&rarr; In-store</span>
+				</div>
+				
+			</div>
+		</div>
+	
+
+        </div>
+    </div>
+    <footer class="site-footer site-footer--sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 hidden-sm">
+                    <h5 class="footer-heading">Kingfield Neighborhood Association</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque augue massa, sodales eu est tempor, feugiat faucibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    </p>
+                </div>
+                <div class="col-3 hidden-sm">
+                    <!-- <h5 class="footer-heading">Useful Links</h5>
+                    <ul>
+                        <li><a href="https://www.acm.org/">ACM National</a></li>
+                        <li><a href="https://www.cs.umn.edu/">CS&amp;E Department</a></li>
+                        <li><a href="https://z.umn.edu/suggest_acm">Suggestion Box</a></li>
+                    </ul> -->
+                </div>
+                <div class="col-3" id="getintouch">
+                    <h5 class="footer-heading">Get&nbsp;in&nbsp;touch with&nbsp;us</h5>
+                    <p id="links">
+                        <a href="/rss.xml" target="_blank" rel="noopener" class="nocolorlink">
+                            <i class="fa fa-fw fa-rss"></i>
+                        </a>
+                        <a href="mailto:info@kingfield.org" target="_blank" rel="noopener" class="nocolorlink">
+                            <i class="fa fa-fw fa-envelope"></i>
+                        </a>
+                        <a href="https://www.facebook.com/KingfieldNeighborhoodAssociation" target="_blank" rel="noopener" class="nocolorlink">
+                            <i class="fa fa-fw fa-facebook-square"></i>
+                        </a>
+                        <a href="https://twitter.com/Kingfield_KFNA" target="_blank" rel="noopener" class="nocolorlink">
+                            <i class="fa fa-fw fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com/kingfield_kfna/" target="_blank" rel="noopener" class="nocolorlink">
+                            <i class="fa fa-fw fa-instagram"></i>
+                        </a>
+                        <a href="tel:+16128235980" target="_blank" rel="noopener" class="nocolorlink">
+                            <i class="fa fa-fw fa-phone"></i>
+                        </a>
+                    </p>
+                    
+                </div>
+            </div>
+            <div class="row footer-copyright">
+                <p>Copyright &copy; 2020 KFNA.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
